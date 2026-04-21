@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "TestData": {
+      "title": "Test Data",
+      "description": "Generated test questions and configuration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "config": { "type": "object" },
+        "questions": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "config", "questions", "createdAt"]
+    },
+    "TestAttempt": {
+      "title": "Test Attempt",
+      "description": "A user's attempt at a test",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "testId": { "type": "string" },
+        "answers": { "type": "object" },
+        "timeTakenSeconds": { "type": "integer" },
+        "score": { "type": "integer" },
+        "totalQuestions": { "type": "integer" },
+        "completedAt": { "type": "string", "format": "date-time" },
+        "analysis": { "type": "object" }
+      },
+      "required": ["id", "userId", "testId", "answers", "timeTakenSeconds", "score", "totalQuestions", "completedAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "tests/{testId}": {
+      "schema": "TestData",
+      "description": "Generated tests"
+    },
+    "attempts/{attemptId}": {
+      "schema": "TestAttempt",
+      "description": "Attempts at tests"
+    }
+  }
+}
